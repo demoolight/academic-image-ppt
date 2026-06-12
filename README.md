@@ -137,4 +137,5 @@ academic-image-ppt/
 2、进行色调变换、字体修改————图片重绘，可以利用**豆包生图**进行修改；
 3、用Codex的image gen技能重绘，注意小范围修改只改对应页即可；
 4、先保存为PDF格式，再利用**WPS的PDF转PPT**（但是这种方式可能会造成要素大范围偏移，而且无法保证所有文字板块可以恢复成可编辑状态）；
-5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt"下"ppt-to-editable"这个skill（尚未测试）。
+5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt"
+ 下"ppt-to-editable"这个skill（尚未测试）。
