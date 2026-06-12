@@ -1,8 +1,11 @@
 ![Academic Image PPT workflow](skills/academic-image-ppt/assets/workflow-academic-image-ppt.png)
 
 `academic-image-ppt` 是一个 Codex Skill，用于把论文、毕业论文、开题/答辩材料、研究报告或学术手稿整理成图片版学术 PPT。它的核心路线是：先生成一张张完整的 16:9 slide 图片，再把图片全页嵌入 PPTX。
-
 它适合需要高质量视觉表达、严格遵守论文事实、并愿意先确认大纲和样页再批量生成的学术汇报场景。
+
+【本项目遵循的是尽最大可能减少材料快速整理、设计美观的PPT等通常耗费大量时间的工作，帮助学术研究者节约时间以提高效率，把更多精力放在研究中。当前主流model、harnes、XXclaw等生成PPT的能力大同小异，大多利用python CLI生成可编辑PPT，包括具有广泛影响的“**ppt master**”skill，生成的PPT更符合行研PPT、发布会演示级PPT，但是在结构设计、布局美观度等方面难以满足我们的学术汇报需求。与此同时，**OpenAI强力的image2.0模型**发布，为生成美观的PPT提供了可能。尽管生成的结果是PNG类型的PPT，**但是也有很多可以实现二次编辑的方法可以实现修改需求**（**已附到文末**）。
+但也因此，**我们需要GPT的会员或API，帮助我们使用其智能体Codex，从而最大限度发挥image2.0模型的能力。**
+如上，祝各位使用顺利！】
 
 ![Academic Image PPT reference gallery - black white navy](skills/academic-image-ppt/assets/reference-thumbnails/参考图1（黑白+藏蓝）.png)
 
@@ -133,10 +136,9 @@ academic-image-ppt/
 
 ### 如何实现可编辑/修改？
 
-由于**本skill高度依赖Openai的image 2.0模型**，因此在Codex中最为适配，其他agent或harness中并未试验，欢迎各种形式和方向的PR。正因此，也导致**只能生成PNG类型的图片PPT**，这可能会产生困扰。经过探寻，发现可以**进行编辑或简单修改的方式**有以下几种：
+由于**本skill高度依赖Openai的image 2.0模型**，因此在Codex中最为适配，其他agent或harness中并未试验，欢迎提交各种方向的PR。正因此，也导致**只能生成PNG类型的图片PPT**，这可能会产生困扰。经过探寻，发现可以**进行编辑或简单修改的方式**有以下几种：
 1、只需要小范围修改某些字————利用**WPS会员**的**图片编辑功能**，可以“**无痕改字**”，修改字数相似的情况下可以保留原有字体，方便快捷；
 2、进行色调变换、字体修改————图片重绘，可以利用**豆包生图**进行修改；
 3、用Codex的image gen技能重绘，注意小范围修改只改对应页即可；
 4、先保存为PDF格式，再利用**WPS的PDF转PPT**（但是这种方式可能会造成要素大范围偏移，而且无法保证所有文字板块可以恢复成可编辑状态）；
-5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt"
- 下"ppt-to-editable"这个skill（尚未测试）。
+5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt" 下"ppt-to-editable"这个skill（尚未测试）。
