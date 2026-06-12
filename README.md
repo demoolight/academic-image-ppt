@@ -1,4 +1,4 @@
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/805ab94e-0931-4136-863e-356fc42dba00" /># Academic Image PPT
+![Uploading image.png…]()
 
 `academic-image-ppt` 是一个 Codex Skill，用于把论文、毕业论文、开题/答辩材料、研究报告或学术手稿整理成图片版学术 PPT。它的核心路线是：先生成一张张完整的 16:9 slide 图片，再把图片全页嵌入 PPTX。
 
