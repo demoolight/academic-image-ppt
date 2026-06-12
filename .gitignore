@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+output/
+qa/
+image_pages/
+thumbnails/
+*.pptx
