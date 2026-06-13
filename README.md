@@ -4,7 +4,9 @@
 它适合需要高质量视觉表达、严格遵守论文事实、并愿意先确认大纲和样页再批量生成的学术汇报场景。
 
 【本项目遵循的是尽最大可能减少材料快速整理、设计美观的PPT等通常耗费大量时间的工作，帮助学术研究者节约时间以提高效率，把更多精力放在研究中。当前主流model、harnes、XXclaw等生成PPT的能力大同小异，大多利用python CLI生成可编辑PPT，包括具有广泛影响的“**ppt master**”skill，生成的PPT更符合行研PPT、发布会演示级PPT，但是在结构设计、布局美观度等方面难以满足我们的学术汇报需求。与此同时，**OpenAI强力的image2.0模型**发布，为生成美观的PPT提供了可能。尽管生成的结果是PNG类型的PPT，**但是也有很多可以实现二次编辑的方法可以实现修改需求**（**已附到文末**）。
+
 但也因此，**我们需要GPT的会员或API，帮助我们使用其智能体Codex，从而最大限度发挥image2.0模型的能力。**
+
 如上，祝各位使用顺利！】
 
 ![Academic Image PPT reference gallery - black white navy](skills/academic-image-ppt/assets/reference-thumbnails/参考图1（黑白+藏蓝）.png)
@@ -146,4 +148,4 @@ academic-image-ppt/
 
 4、先保存为PDF格式，再利用**WPS的PDF转PPT**（但是这种方式可能会造成要素大范围偏移，而且无法保证所有文字板块可以恢复成可编辑状态）；
 
-5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt" 下"ppt-to-editable"这个skill（尚未测试）。
+5、利用另外一个repo："https://github.com/Pikapika260214/rw-consulting-ppt" 下"ppt-to-editable"skill。测试结果：所有图形元素（包括背景）整合成同一张图片，文字内容单独提取成可编辑模式，无法更改图形元素。如果文字和小图形有重叠，提取文字的时候可能会从图形中抠取，导致图形镂空。不适合最终画面要求度高的用户。
