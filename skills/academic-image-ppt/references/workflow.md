@@ -279,17 +279,44 @@ Create a contact sheet from all slide PNGs. Inspect it before packaging:
 
 ## 11. PPTX Packaging
 
-Package by embedding each slide image as one full-bleed image.
+Before packaging, create `qa/speaker-notes.md` unless the user explicitly asked to omit speaker notes. Write one note block per approved slide, in slide order.
+
+Speaker notes rules:
+
+- use headings in the exact form `## Slide 01`, `## Slide 02`, and so on;
+- base every note on the approved blueprint, slide image content, and source material;
+- make notes suitable for defense/report narration, not a verbatim reading of slide text;
+- keep each note concise enough for the user's target duration;
+- include transition cues where they help the presenter move between sections;
+- preserve exact names, metric meanings, chart conclusions, and closing-page wording;
+- do not add unsupported claims, citations, numbers, cases, school metadata, or experiment results.
+
+Package by embedding each slide image as one full-bleed image and inserting the matching note block into that slide's speaker notes area.
 
 Rules:
 
 - derive slide count from `image_pages/slide_*.png`;
 - never hardcode a count such as 20;
 - preserve filename order;
+- derive speaker notes count from `qa/speaker-notes.md`;
+- match `Slide 01` notes to `image_pages/slide_01.png`, `Slide 02` notes to `image_pages/slide_02.png`, and so on;
 - set image position to `x=0`, `y=0`, `w=1280`, `h=720`, `fit=cover`;
 - verify that PPTX slide count equals image count and approved blueprint count;
+- verify that notes count equals slide count unless the user explicitly chose no notes;
+- verify that each PPTX slide's notes area contains the intended note text;
 - verify that each slide contains exactly one full-bleed image and no extra editable text/shapes;
 - final file name should be `<paper-title>_图片版.pptx`.
+
+Use the bundled script when the environment has Node.js dependencies available:
+
+```bash
+npm install
+node skills/academic-image-ppt/scripts/package_image_pptx_with_notes.mjs \
+  --images <run>/image_pages \
+  --notes <run>/qa/speaker-notes.md \
+  --out <run>/output/<paper-title>_图片版.pptx \
+  --title "<paper title>"
+```
 
 ## 12. Final Verification
 
@@ -302,10 +329,13 @@ Before delivery, verify:
 - `qa/thumbnail-style-contract.md` exists and was used by sample and final prompts;
 - `qa/sample-revision-contract.md` exists if the user selected a sample structure as the basis for final pages, and was used by final prompts;
 - `qa/sample-approval.md` records full-size sample approval;
+- `qa/speaker-notes.md` exists unless notes were explicitly omitted;
 - all slide images exist and are exactly `1280x720` unless another size was selected;
 - `qa/contact-sheet.png` includes all expected slides;
 - PPTX slide count equals image count and approved blueprint count;
+- PPTX speaker notes count equals slide count unless notes were explicitly omitted;
 - each PPTX slide contains exactly one full-slide image;
+- each PPTX slide's notes area contains the matching defense narration from `qa/speaker-notes.md`;
 - OCR/manual QA confirms critical Chinese text, formulas, metrics, names, and captions;
 - all data, citations, chart values, cases, and factual claims are traceable to source material or explicit user confirmation; unresolved items were omitted or marked `needs user confirmation` before prompting.
 

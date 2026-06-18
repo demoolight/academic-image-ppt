@@ -1,6 +1,6 @@
 ---
 name: academic-image-ppt
-description: Generate academic, thesis-defense, seminar, or research-report PowerPoint decks as image-based PPTX files from academic papers. Use when the user provides a paper, thesis, dissertation, report, PDF, DOCX, or manuscript and asks for "生成学术PPT", academic PPT, defense PPT, presentation, report deck, "图片版PPT", image-only PPT, imagegen-generated PPT, or slide images embedded into PowerPoint. This skill prioritizes full-page raster slide generation with imagegen, strict source-faithful academic content, Chinese text/data QA, and final PPTX packaging where each slide is one full-bleed image.
+description: Generate academic, thesis-defense, seminar, or research-report PowerPoint decks as image-based PPTX files from academic papers. Use when the user provides a paper, thesis, dissertation, report, PDF, DOCX, or manuscript and asks for "生成学术PPT", academic PPT, defense PPT, presentation, report deck, "图片版PPT", image-only PPT, imagegen-generated PPT, slide images embedded into PowerPoint, or defense speaker notes. This skill prioritizes full-page raster slide generation with imagegen, strict source-faithful academic content, Chinese text/data QA, speaker notes for each slide, and final PPTX packaging where each slide is one full-bleed image.
 ---
 
 # Academic Image PPT
@@ -11,6 +11,7 @@ Create academic "图片版 PPT" decks from papers. The intended output is not an
 
 - Use the built-in imagegen path by default for full-page slide images.
 - Treat each slide image as the canonical page. The PPTX is only a delivery wrapper containing one full-slide image per slide.
+- Generate source-faithful defense speaker notes for each slide by default unless the user explicitly asks to omit notes. Insert each slide's note into that slide's PPT speaker notes area during final PPTX packaging.
 - Use 16:9 `1280x720` as the default slide image size unless the user gives another size.
 - Do not rebuild the deck as editable shapes unless the user explicitly asks for editable PPT.
 - Do not switch to local refinement, local drawing, Python + PIL, SVG/HTML/canvas rendering, or any "本地精修方式生成" path unless the user explicitly requests it. If the user asks for image gen / imagegen generation, use imagegen for slide images and do not decide on a local generation method yourself.
@@ -31,6 +32,7 @@ Create academic "图片版 PPT" decks from papers. The intended output is not an
 - Maintain a high-risk text and data checklist throughout prompting and QA. At minimum, check school/institution name, logo use, student/author name, student ID, major/program, advisor display or omission, date, closing wording, section titles, page numbers, metric names, metric values, chart labels, and indicator meanings on every relevant slide. A correct number with a wrong indicator meaning is a failure and must be regenerated or corrected.
 - Use anchor-page-first generation after sample approval when the deck has a user-preferred sample, a critical evidence page, or a page that defines the visual system. Generate that anchor page first, inspect it, save it as `image_pages/slide_XX.png` only if it satisfies the visual contract and high-risk text constraints, then expand to the rest of the deck. If a page repeatedly fails imagegen, record it, continue with independent pages when safe, and return to regenerate the failed page before contact-sheet QA.
 - Generate the final page as a standalone closing / Q&A / correction-request page. Do not merge the closing page with summary or content slides. Avoid "感谢聆听"; prefer wording such as "恳请各位老师同学批评指正" or "恳请各位老师批评指正", adjusted to the user's audience.
+- Create `qa/speaker-notes.md` after the final blueprint is approved and before PPTX packaging. Notes must be split one section per slide, follow the approved slide order, and act as brief defense narration rather than a verbatim reading of the slide. Use only source-supported content, preserve the user's audience tone, include transition cues where helpful, and keep closing-page wording consistent with the approved final slide.
 - For charts and analytical figures such as training curves, confusion matrices, ROC curves, bar charts, tables, and result plots, prefer imagegen redrawing instead of directly pasting the original PDF/DOCX figure. Use the source figure as the strict data reference: preserve hard metrics, values, trends, axes, legends, labels, AUC/accuracy numbers, and class names. Integrate the redrawn chart into the page style, and add callout arrows, highlights, labels, or shaded regions that mark the key finding so the slide is self-explanatory. Directly paste an original figure only when the user asks for original preservation or exact redraw quality cannot be safely achieved.
 - Run visual and text QA after imagegen. Chinese text, formulas, names, school metadata, captions, metrics, and table values are high-risk. Never invent data, indicators, citations, chart values, school or author metadata, experiment results, or source claims. If a number, citation, case, chart value, or factual claim is not in the source material or explicitly confirmed by the user, mark it as `needs user confirmation`, omit it, or rewrite it as a non-numeric qualitative statement; do not send it into an image prompt.
 
@@ -41,6 +43,7 @@ Use these when applicable:
 - `imagegen` for every full-slide raster generation or regeneration.
 - `documents` or PDF-reading tools to extract academic paper content from DOCX/PDF.
 - `Presentations` or artifact-tool presentation JSX to package final images into PPTX.
+- `scripts/package_image_pptx_with_notes.mjs` when packaging image pages into PPTX with speaker notes.
 
 ## Workflow
 
@@ -60,8 +63,9 @@ For the full workflow, read `references/workflow.md`.
 12. Generate one full-slide image per slide with imagegen using the selected visual contract. Prefer anchor-page-first generation when a page defines the deck's style or carries the user's strongest preference.
 13. Assemble `qa/contact-sheet.png` and inspect the full deck at thumbnail level.
 14. Run the QA gates in `references/qa-checklist.md`.
-15. Package the final PPTX by embedding each `image_pages/slide_XX.png` full-bleed.
-16. Verify final PPTX slide count, image count, approved blueprint count, and that each slide contains exactly one full-bleed image.
+15. Generate `qa/speaker-notes.md`, one note block per approved slide, with source-faithful defense narration.
+16. Package the final PPTX by embedding each `image_pages/slide_XX.png` full-bleed and inserting the matching speaker note into that slide's notes area.
+17. Verify final PPTX slide count, image count, approved blueprint count, notes count, and that each slide contains exactly one full-bleed image plus the intended speaker note.
 
 ## Run Folder Convention
 
@@ -83,11 +87,33 @@ Use a per-run workspace. Keep final deliverables in `output/` and QA artifacts i
     thumbnail-style-contract.md
     sample-revision-contract.md
     sample-approval.md
+    speaker-notes.md
     contact-sheet.png
     ocr-report.md
     pptx-package-check.md
   output/
     <paper-title>_图片版.pptx
+```
+
+Package with speaker notes using:
+
+```bash
+npm install
+node skills/academic-image-ppt/scripts/package_image_pptx_with_notes.mjs \
+  --images <run>/image_pages \
+  --notes <run>/qa/speaker-notes.md \
+  --out <run>/output/<paper-title>_图片版.pptx \
+  --title "<paper title>"
+```
+
+Write `qa/speaker-notes.md` with one heading per slide:
+
+```markdown
+## Slide 01
+第一页答辩讲稿。
+
+## Slide 02
+第二页答辩讲稿。
 ```
 
 ## Case Study
@@ -111,7 +137,8 @@ Final response should include:
 
 - final PPTX path;
 - slide count;
+- whether speaker notes were inserted;
 - whether every slide is image-only;
 - QA status and any remaining risks.
 
-Do not claim the deck is complete if any image is missing, if the PPTX slide count differs from the image count, or if Chinese/data QA has not been performed.
+Do not claim the deck is complete if any image is missing, if speaker notes are missing or misaligned, if the PPTX slide count differs from the image count, or if Chinese/data QA has not been performed.

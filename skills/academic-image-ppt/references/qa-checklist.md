@@ -100,15 +100,26 @@ Use this checklist before delivering any academic image PPTX.
 - [ ] The approved full-size sample direction is consistently applied across all final slide images.
 - [ ] The approved full-size sample direction visibly inherits the selected thumbnail style contract; if it diverges, regenerate the sample before batch generation.
 
+## Speaker Notes
+
+- [ ] `qa/speaker-notes.md` exists unless the user explicitly requested no notes.
+- [ ] `qa/speaker-notes.md` contains one note block per approved slide.
+- [ ] Notes are ordered sequentially and match `image_pages/slide_01.png` through the final slide.
+- [ ] Notes are source-faithful defense/report narration, not unsupported expansion or verbatim slide reading.
+- [ ] Notes preserve exact names, metric meanings, chart conclusions, section transitions, and closing-page wording.
+- [ ] Notes do not invent citations, data, cases, experiment results, school/author metadata, or claims.
+
 ## PPTX Package
 
 - [ ] Final PPTX exists and is non-empty.
 - [ ] PPTX slide count equals image count and approved blueprint count.
 - [ ] Each PPTX slide contains exactly one full-bleed image.
 - [ ] PPTX package validation confirms one image relationship per slide and no extra editable text/shapes on slide pages.
+- [ ] PPTX notes count equals slide count unless the user explicitly requested no notes.
+- [ ] Each PPTX slide's speaker notes area contains the matching note block from `qa/speaker-notes.md`.
 - [ ] No slide has a blank or duplicate image.
 - [ ] The final filename follows `<paper-title>_图片版.pptx`.
 
 ## Delivery Note
 
-Report slide count, final path, and any residual risk. If OCR/manual text QA was limited, say so explicitly.
+Report slide count, final path, whether speaker notes were inserted, and any residual risk. If OCR/manual text QA was limited, say so explicitly.
