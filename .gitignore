@@ -7,5 +7,7 @@ output/
 qa/
 image_pages/
 thumbnails/
+!docs/assets/thumbnails/
+!docs/assets/thumbnails/*.png
 *.pptx
 !docs/assets/pptx/*.pptx
