@@ -11,9 +11,9 @@
 
 如上，祝各位使用顺利！】
 
-![Academic Image PPT reference gallery - navy burgundy accent 1](skills/academic-image-ppt/assets/reference-thumbnails/参考图1（黑白+藏蓝+重点酒红）.png)
+![Academic Image PPT reference gallery - rural finance style preview](skills/academic-image-ppt/assets/reference-thumbnails/readme-reference-01.png)
 
-![Academic Image PPT reference gallery - navy burgundy accent 2](skills/academic-image-ppt/assets/reference-thumbnails/参考图2（黑白+藏蓝+重点酒红）.png)
+![Academic Image PPT reference gallery - case analysis style preview](skills/academic-image-ppt/assets/reference-thumbnails/readme-reference-02.png)
 
 > From academic source material to source-faithful image-based defense/report decks.
 
@@ -21,8 +21,8 @@
 
 本仓库附带一个纯静态 PPT 展示网站，无需后端、数据库或前端框架：
 
-- [项目展示首页](https://demoolight.github.io/academic-image-ppt/)
-- [示例 PPT 翻页浏览器](https://demoolight.github.io/academic-image-ppt/viewer.html)
+- [项目展示首页](https://demoolight.github.io/academic-image-ppt/?v=20260619)
+- [示例 PPT 翻页浏览器](https://demoolight.github.io/academic-image-ppt/viewer.html?v=20260619)
 - 示例 PPTX 文件位于 `docs/assets/pptx/`，网页预览图片位于 `docs/assets/gallery/`。
 - 在 GitHub 的 `Code` 文件浏览页点击 `index.html` 或 `viewer.html` 会显示源码；请使用上面的 GitHub Pages 地址查看渲染后的网页。
 

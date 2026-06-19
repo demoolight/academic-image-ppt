@@ -314,8 +314,10 @@
     let currentDeck = null;
     let currentIndex = 0;
 
+    const GALLERY_VERSION = '20260619-restore-ppt-covers';
+
     async function loadGallery() {
-      const res = await fetch('site/gallery.json');
+      const res = await fetch(`site/gallery.json?v=${GALLERY_VERSION}`, { cache: 'no-store' });
       if (!res.ok) throw new Error('gallery.json not found');
       return res.json();
     }
