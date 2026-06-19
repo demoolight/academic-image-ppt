@@ -11,9 +11,9 @@
 
 如上，祝各位使用顺利！】
 
-![Academic Image PPT reference gallery - black white navy](skills/academic-image-ppt/assets/reference-thumbnails/参考图1（黑白+藏蓝）.png)
+![Academic Image PPT reference gallery - navy burgundy accent 1](skills/academic-image-ppt/assets/reference-thumbnails/参考图1（黑白+藏蓝+重点酒红）.png)
 
-![Academic Image PPT reference gallery - navy burgundy accent](skills/academic-image-ppt/assets/reference-thumbnails/参考图2（黑白+藏蓝+重点酒红）.png)
+![Academic Image PPT reference gallery - navy burgundy accent 2](skills/academic-image-ppt/assets/reference-thumbnails/参考图2（黑白+藏蓝+重点酒红）.png)
 
 > From academic source material to source-faithful image-based defense/report decks.
 
