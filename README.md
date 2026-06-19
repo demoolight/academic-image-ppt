@@ -21,9 +21,10 @@
 
 本仓库附带一个纯静态 PPT 展示网站，无需后端、数据库或前端框架：
 
-- [项目展示首页](index.html)
-- [示例 PPT 翻页浏览器](viewer.html)
+- [项目展示首页](https://demoolight.github.io/academic-image-ppt/)
+- [示例 PPT 翻页浏览器](https://demoolight.github.io/academic-image-ppt/viewer.html)
 - 示例 PPTX 文件位于 `docs/assets/pptx/`，网页预览图片位于 `docs/assets/gallery/`。
+- 在 GitHub 的 `Code` 文件浏览页点击 `index.html` 或 `viewer.html` 会显示源码；请使用上面的 GitHub Pages 地址查看渲染后的网页。
 
 ## 它解决什么问题？
 
