@@ -144,7 +144,7 @@ academic-image-ppt/
       scripts/
 ```
 
-## FAQ
+## 常见问题解答
 
 ### 生成的 PPTX 能逐字修改吗？
 
